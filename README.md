@@ -1,14 +1,12 @@
 # Datacat SillyTavern Browser
 
-Browse Datacat from SillyTavern.
+## `custom-features` Branch Changes
 
-## Fork Changes
-
-- Deleted the Datacat icon from the top bar because on mobile screens it was clipping out of the screen. Adjusted the icon in the extension wand overlay for consistent overlay alignment.
-
----
+- Deleted the Datacat icon from the top bar because on mobile screens it was clipping out of the screen. You can only access Datacat in the extensions wand menu now. Additionally, adjusted the icon size and margin in the extension wand overlay for consistent overlay alignment.
 
 # Original README
+
+Browse Datacat from SillyTavern.
 
 ## Install in SillyTavern
 
