@@ -2,6 +2,14 @@
 
 Browse Datacat from SillyTavern.
 
+## Fork Changes
+
+- Deleted the Datacat icon from the top bar because on mobile screens it was clipping out of the screen. Adjusted the icon in the extension wand overlay for consistent overlay alignment.
+
+---
+
+# Original README
+
 ## Install in SillyTavern
 
 1. Open SillyTavern and click **Extensions** (the cubes icon).
@@ -9,7 +17,7 @@ Browse Datacat from SillyTavern.
 3. Paste this Git URL:
 
    ```text
-   https://github.com/datacat-run/datacat-sillytavern-browser
+   https://github.com/julez122/datacat-sillytavern-browser
    ```
 
 4. Choose **Install just for me**. SillyTavern administrators can instead

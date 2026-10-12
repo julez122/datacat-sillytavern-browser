@@ -27,8 +27,6 @@ const DATACAT_MAIN_VIEW_CONTENT_ID = 'datacat-reskin-main-view-content';
 const DATACAT_MAIN_VIEW_BROWSER_CLASS = 'datacat-reskin-main-view-content--browser';
 const DATACAT_BROWSER_LAYER_ID = 'datacat-browser-stable-layer';
 const DATACAT_BROWSER_LAYER_VISIBLE_CLASS = 'datacat-browser-stable-layer--visible';
-const DATACAT_BROWSER_TOPBAR_SLOT_ID = 'datacat_browser_topbar_slot';
-const DATACAT_BROWSER_TOPBAR_BUTTON_ID = 'datacat_browser_topbar_button';
 const DATACAT_BROWSER_WAND_ID = 'datacat_browser_wand';
 const DATACAT_BROWSER_TITLE_ID = 'datacat-browser-title';
 const DATACAT_ST_IMPORT_MAP_KEY = 'datacatBrowserImportedCharactersById';
@@ -1009,53 +1007,6 @@ document.addEventListener('visibilitychange', () => {
 });
 window.dispatchEvent(new Event('datacat-browser:ready'));
 
-function ensureDatacatTopbarLauncher() {
-    const host = document.getElementById('top-settings-holder') || document.getElementById('top-bar');
-    if (!host) {
-        return false;
-    }
-
-    let slot = document.getElementById(DATACAT_BROWSER_TOPBAR_SLOT_ID);
-    if (!slot) {
-        slot = document.createElement('div');
-        slot.id = DATACAT_BROWSER_TOPBAR_SLOT_ID;
-        slot.className = 'drawer datacat-browser-topbar-slot';
-    }
-
-    let button = document.getElementById(DATACAT_BROWSER_TOPBAR_BUTTON_ID);
-    if (!button) {
-        button = document.createElement('button');
-        button.id = DATACAT_BROWSER_TOPBAR_BUTTON_ID;
-    }
-    button.type = 'button';
-    button.className = 'drawer-icon interactable datacat-browser-topbar-button';
-    button.title = 'Explore Datacat';
-    button.setAttribute('aria-label', 'Explore Datacat');
-    let icon = button.querySelector('.datacat-browser-cat-icon');
-    if (!icon) {
-        icon = document.createElement('img');
-        icon.className = 'datacat-browser-cat-icon';
-        icon.src = DATACAT_CAT_ICON_URL;
-        icon.alt = '';
-        icon.draggable = false;
-        icon.setAttribute('aria-hidden', 'true');
-        button.replaceChildren(icon);
-    }
-    button.onclick = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        openDatacatBrowser();
-    };
-    if (button.parentElement !== slot) {
-        slot.appendChild(button);
-    }
-
-    if (slot.parentElement !== host) {
-        host.appendChild(slot);
-    }
-    return true;
-}
-
 function ensureDatacatWandLauncher() {
     const host = document.getElementById('extensionsMenu');
     if (!host) {
@@ -1090,23 +1041,18 @@ function ensureDatacatWandLauncher() {
 }
 
 function ensureDatacatBrowserLaunchers() {
-    ensureDatacatTopbarLauncher();
     ensureDatacatWandLauncher();
 }
 
 function observeDatacatBrowserLaunchers() {
     const observer = new MutationObserver(() => {
-        const topbarHost = document.getElementById('top-settings-holder') || document.getElementById('top-bar');
-        const topbarSlot = document.getElementById(DATACAT_BROWSER_TOPBAR_SLOT_ID);
-        const topbarReady = document.getElementById(DATACAT_BROWSER_TOPBAR_BUTTON_ID)?.isConnected
-            && topbarSlot?.parentElement === topbarHost;
         const wandHost = document.getElementById('extensionsMenu');
         const wandReady = document.getElementById(DATACAT_BROWSER_WAND_ID)?.parentElement === wandHost;
-        if (topbarReady && (!wandHost || wandReady)) {
-            return;
-        }
+        if (!wandHost || wandReady) {
+    return;
+}
 
-        ensureDatacatBrowserLaunchers();
+ensureDatacatWandLauncher();
     });
     observer.observe(document.body, { childList: true, subtree: true });
 }
