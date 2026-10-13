@@ -231,7 +231,7 @@ function ensureFrameBridgeSrc(frame) {
 function isDatacatMainViewAvailable() {
     return Boolean(
         document.getElementById(DATACAT_MAIN_VIEW_ID)
-            && document.getElementById(DATACAT_MAIN_VIEW_CONTENT_ID),
+        && document.getElementById(DATACAT_MAIN_VIEW_CONTENT_ID),
     );
 }
 
@@ -732,10 +732,10 @@ function isBridgeInitRequest(event) {
     const data = event.data;
     return Boolean(
         data
-            && typeof data === 'object'
-            && data.type === DATACAT_BRIDGE_MSG_READY
-            && data.needsInit === true
-            && isAllowedBridgeOrigin(event.origin),
+        && typeof data === 'object'
+        && data.type === DATACAT_BRIDGE_MSG_READY
+        && data.needsInit === true
+        && isAllowedBridgeOrigin(event.origin),
     );
 }
 
@@ -1049,10 +1049,10 @@ function observeDatacatBrowserLaunchers() {
         const wandHost = document.getElementById('extensionsMenu');
         const wandReady = document.getElementById(DATACAT_BROWSER_WAND_ID)?.parentElement === wandHost;
         if (!wandHost || wandReady) {
-    return;
-}
+            return;
+        }
 
-ensureDatacatWandLauncher();
+        ensureDatacatWandLauncher();
     });
     observer.observe(document.body, { childList: true, subtree: true });
 }

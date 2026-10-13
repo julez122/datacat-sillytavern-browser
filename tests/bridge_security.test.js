@@ -96,12 +96,12 @@ test('Datacat chat handoff pins the first message until user interaction', () =>
             frameCallback = callback;
             return 1;
         },
-        cancelFrame: () => {},
+        cancelFrame: () => { },
         setTimer: (callback) => {
             timerCallback = callback;
             return 2;
         },
-        clearTimer: () => {},
+        clearTimer: () => { },
     });
 
     assert.equal(chatElement.scrollTop, 0);

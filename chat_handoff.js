@@ -12,7 +12,7 @@ const DATACAT_CHAT_USER_INTENT_EVENTS = ['wheel', 'touchstart', 'pointerdown'];
  */
 export function pinDatacatChatToTop(chatElement, options = {}) {
     if (!chatElement?.addEventListener || !chatElement?.removeEventListener) {
-        return () => {};
+        return () => { };
     }
 
     const setTimer = options.setTimer ?? globalThis.setTimeout.bind(globalThis);
